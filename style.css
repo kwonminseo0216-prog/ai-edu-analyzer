@@ -1,0 +1,454 @@
+/* ==========================================
+   [Variables & Base Settings]
+   ========================================== */
+:root {
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --border-color: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --accent: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    
+    --font-size-base: 14px;
+    --radius: 12px;
+    --transition: all 0.25s ease;
+}
+
+/* 3. 다크모드 변수 전환 (app.js/storage.js 연동) */
+html.dark {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --border-color: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary: #6366f1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: var(--transition);
+    line-height: 1.6;
+}
+
+/* ==========================================
+   [1. Header Styles]
+   ========================================== */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--bg-card);
+    border-b: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+}
+
+.logo-area h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.global-widgets {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* 20. 타이머 스타일 */
+.widget-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--bg-main);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.widget-box button {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 0.25rem;
+}
+
+select, input[type="password"] {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.icon-btn:hover {
+    background-color: var(--border-color);
+    color: var(--text-main);
+}
+
+/* ==========================================
+   [Layout & Grid Containers]
+   ========================================== */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-w: 1600px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   [Card Component Design]
+   ========================================== */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.card h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.card-header h3 { margin-bottom: 0; }
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.input-group select, .input-group input {
+    width: 100%;
+}
+
+/* 9, 12. 드래그 앤 드롭 존 */
+.drop-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.drop-zone i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.drop-zone:hover {
+    border-color: var(--primary);
+    background-color: rgba(79, 70, 229, 0.05);
+}
+
+.textarea-wrapper textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    resize: vertical;
+    font-size: 0.9rem;
+    outline: none;
+    margin-bottom: 0.5rem;
+}
+
+.hidden { display: none !important; }
+
+/* Buttons */
+.btn-main {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-main:hover { background-color: var(--primary-hover); }
+
+.btn-sub {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.btn-accent {
+    padding: 0.5rem 1rem;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ==========================================
+   [Right Panel & Tabs UI]
+   ========================================== */
+.result-panel {
+    position: relative;
+    transition: var(--transition);
+}
+
+/* 결과 잠금 상태 레이어 효과 */
+.result-panel.locked {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* 7. 내보내기 툴바 */
+.export-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.export-toolbar button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+/* 탭 메뉴 링크 정의 */
+.tab-menu {
+    display: flex;
+    border-b: 2px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.25rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition);
+    margin-bottom: -2px;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* ==========================================
+   [Content Components (Analysis, Visual, Quiz)]
+   ========================================== */
+.document-viewer {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    min-h: 150px;
+}
+
+/* 14. 형광펜 하이라이트 스타일 */
+mark {
+    background-color: rgba(245, 158, 11, 0.3);
+    color: inherit;
+    font-weight: bold;
+    padding: 0 2px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+html.dark mark {
+    background-color: rgba(245, 158, 11, 0.5);
+}
+
+mark:hover {
+    background-color: var(--warning);
+    color: black;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-box, .visual-card, .ai-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+}
+
+.info-box h4, .visual-card h4, .ai-card h4 {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* 16. 워드클라우드 개별 스팬 폰트 효과 */
+.word-cloud-span {
+    display: inline-block;
+    margin: 5px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background-color: var(--bg-main);
+    transition: var(--transition);
+    cursor: pointer;
+}
+.word-cloud-span:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* 22. AI 챗봇 레이아웃 */
+.chat-box {
+    height: 180px;
+    overflow-y: auto;
+    background-color: var(--bg-main);
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.chat-input-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chat-input-row input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-card);
+    color: var(--text-main);
+}
+
+.chat-input-row button {
+    padding: 0.5rem 1rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* 계정 글자 크기 변환용 전역 클래스 (account.js 연동) */
+.font-normal { font-size: 1rem !important; }
+.font-large { font-size: 1.2rem !important; }
+
+/* ==========================================
+   [Responsive & Mobile Grid Support]
+   ========================================== */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .main-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    .global-widgets {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
